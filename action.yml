@@ -28,7 +28,7 @@ runs:
         echo "Support Linux machines Only"
         exit 1
     - name: Check Password or User Info Empty
-      if: ${{ inputs.rising-cloud-user == '' || inputs. rising-cloud-pasword == '') }}
+      if: ${{ inputs.rising-cloud-user == '' || inputs. rising-cloud-pasword == '' }}
       shell: bash
       run: |
         echo "User and Password cannot be empty"
