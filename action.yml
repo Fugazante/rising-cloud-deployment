@@ -17,7 +17,7 @@ inputs:
   config-file:
     description: 'Rising Cloud YAML file'
     required: false
-    default: "risingcloud.yml"
+    default: "risingcloud.yaml"
 runs:
   using: "composite"
   steps:
