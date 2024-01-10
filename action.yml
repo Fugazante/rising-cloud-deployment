@@ -1,7 +1,8 @@
 name: 'Rising Cloud Deployment'
-color: "purple"
-icon: "cloud-lightning"
 description: 'Deploy your project in Rising Cloud with GitHub Actions'
+branding:
+  icon: 'cloud-lightning'
+  color: 'purple'
 inputs:
   rising-cloud-user:
     description: 'Rising Cloud User'
