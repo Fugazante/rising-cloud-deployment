@@ -36,15 +36,20 @@ runs:
     - name: Install ca-certificates
       shell: bash
       run: |
+        echo "Installing ca-certificates package"
         sudo apt-get update && sudo apt-get install -y ca-certificates
+        echo "Installing Rising Cloud CLI"
         sudo touch /etc/apt/sources.list.d/fury.list
         echo "deb [trusted=yes] https://apt.fury.io/risingcloud/ /" | sudo tee -a /etc/apt/sources.list.d/fury.list
         sudo apt update && sudo apt install -y risingcloud
     - name: Login Rising Cloud
       shell: bash
-      run: risingcloud login -e ${{ inputs.rising-cloud-user }} -p ${{ inputs.rising-cloud-pasword }}
+      run: | 
+        echo "Logging in Rising Cloud"
+        risingcloud login -e ${{ inputs.rising-cloud-user }} -p ${{ inputs.rising-cloud-pasword }}
     - name: Deploy Web Serive
       shell: bash
       working-directory: ${{ inputs.working-directory }}
       run: |
+        echo "Deploying in Rising Cloud"
         risingcloud build -r -c ${{ inputs.config-file }} —d
