@@ -27,7 +27,7 @@ runs:
       run: |
         echo "Support Linux machines Only"
         exit 1
-    - name: Check if Password or User Info Empty
+    - name: Validate user inputs
       if: ${{ inputs.rising-cloud-user == '' || inputs.rising-cloud-password == '' }}
       shell: bash
       run: |
@@ -36,16 +36,16 @@ runs:
     - name: Install ca-certificates
       shell: bash
       run: |
-        echo "Installing ca-certificates package"
+        echo "Install ca-certificates package"
         sudo apt-get update && sudo apt-get install -y ca-certificates
-    - name: Installing Rising Cloud CLI
+    - name: Install Rising Cloud CLI
       shell: bash
       run: |
         echo "Installing Rising Cloud CLI"
         sudo touch /etc/apt/sources.list.d/fury.list
         echo "deb [trusted=yes] https://apt.fury.io/risingcloud/ /" | sudo tee -a /etc/apt/sources.list.d/fury.list
         sudo apt update && sudo apt install -y risingcloud
-    - name: Login Rising Cloud
+    - name: Login to Rising Cloud
       shell: bash
       run: | 
         echo "Logging in Rising Cloud"

@@ -16,7 +16,7 @@ This GitHub Action deploys your existing Rising Cloud project with only one step
 *rising-cloud-user* and *rising-cloud-password* parameters are mandatory. They should be the credentials 
 of a Rising Cloud account with all the permissions needed for the project deployment, otherwise the action will fail.
 By default, the action considers that .yaml file of your Rising cloud project is in the root path and it is called
-**risincloud.yaml**. If it is not the case, it is possible to configure the path and the file name using the following optional
+**risingcloud.yaml**. If it is not the case, it is possible to configure the path and the file name using the following optional
 parameters.
 
 ## Execute the action with optional parameters
