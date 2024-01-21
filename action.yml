@@ -1,5 +1,5 @@
 name: 'Rising Cloud Deployment'
-description: 'Deploy your project in Rising Cloud with GitHub Actions'
+description: 'Deploy your project to Rising Cloud with GitHub Actions'
 branding:
   icon: 'cloud-lightning'
   color: 'purple'
@@ -7,7 +7,7 @@ inputs:
   rising-cloud-user:
     description: 'Rising Cloud User'
     required: true
-  rising-cloud-pasword:
+  rising-cloud-password:
     description: 'Rising Cloud Password'
     required: true
   working-directory:
@@ -27,8 +27,8 @@ runs:
       run: |
         echo "Support Linux machines Only"
         exit 1
-    - name: Check Password or User Info Empty
-      if: ${{ inputs.rising-cloud-user == '' || inputs.rising-cloud-pasword == '' }}
+    - name: Validate user inputs
+      if: ${{ inputs.rising-cloud-user == '' || inputs.rising-cloud-password == '' }}
       shell: bash
       run: |
         echo "User and Password cannot be empty"
@@ -36,15 +36,23 @@ runs:
     - name: Install ca-certificates
       shell: bash
       run: |
+        echo "Install ca-certificates package"
         sudo apt-get update && sudo apt-get install -y ca-certificates
+    - name: Install Rising Cloud CLI
+      shell: bash
+      run: |
+        echo "Installing Rising Cloud CLI"
         sudo touch /etc/apt/sources.list.d/fury.list
         echo "deb [trusted=yes] https://apt.fury.io/risingcloud/ /" | sudo tee -a /etc/apt/sources.list.d/fury.list
         sudo apt update && sudo apt install -y risingcloud
-    - name: Login Rising Cloud
+    - name: Login to Rising Cloud
       shell: bash
-      run: risingcloud login -e ${{ inputs.rising-cloud-user }} -p ${{ inputs.rising-cloud-pasword }}
-    - name: Deploy Web Serive
+      run: | 
+        echo "Logging in Rising Cloud"
+        risingcloud login -e ${{ inputs.rising-cloud-user }} -p ${{ inputs.rising-cloud-password }}
+    - name: Deploy Web Service
       shell: bash
       working-directory: ${{ inputs.working-directory }}
       run: |
+        echo "Deploying to Rising Cloud"
         risingcloud build -r -c ${{ inputs.config-file }} —d
